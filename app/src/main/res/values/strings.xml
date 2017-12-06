@@ -6,4 +6,5 @@
     <string name="edit_username">Enter a username</string>
     <string name="edit_password">Enter your password</string>
     <string name="button_send">Log On</string>
+    <string name="auth_failed" />
 </resources>
