@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -30,12 +31,14 @@ import java.util.UUID;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
+    private static final String TAG = "Display";
+
     private int GET_FROM_GALLERY = 1;
+
     private ImageView imageContainer;
     private ProgressBar progressBar;
     private Button uploadButton;
-//    private Button galleryButton;
-//    private Button searchButton;
+    private Button searchButton;
     private EditText description;
 
     private CheckBox imagePublic;
@@ -45,6 +48,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
 
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference mUserRef = mDatabase.child("user");
 
     private String email;
 
@@ -61,16 +65,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
         uploadButton.setOnClickListener (new UploadOnClickListener());
 //        galleryButton = (Button)findViewById(R.id.image_gallery);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-//        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
         description = findViewById(R.id.image_description);
         imagePublic = (CheckBox)findViewById(R.id.image_public);
 
-//        searchButton = findViewById(R.id.search_button);
+        searchButton = findViewById(R.id.search_button);
+        searchButton.setOnClickListener (new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                sendMessage(v);
+            }
+        });
+
         //downloadUrl = (TextView) findViewById(R.id.download_url);
 
 
     }
-
 
 
 
@@ -80,33 +90,32 @@ public class DisplayMessageActivity extends AppCompatActivity {
 //            imageContainer.setDrawingCacheEnabled (true);
 //            imageContainer.buildDrawingCache();
 //            Bitmap bitmap = imageContainer.getDrawingCache();
+            String img_path = "firememes/" + UUID.randomUUID() + ".png";
+            StorageReference firememeRef = storage.getReference(img_path);
+
             BitmapDrawable bitmapDrawable = (BitmapDrawable) imageContainer.getDrawable();
             Bitmap bitmap = bitmapDrawable.getBitmap();
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
             byte[] data = stream.toByteArray();
 
-            String img_path = "firememes/" + UUID.randomUUID() + ".png";
-            StorageReference firememeRef = storage.getReference(img_path);
-
-            StorageMetadata metadata = new StorageMetadata.Builder()
-                    .build();
+            UploadTask uploadTask = firememeRef.putBytes (data);
+//            StorageMetadata metadata = new StorageMetadata.Builder()
+//                    .build();
 
             progressBar.setVisibility(View.VISIBLE);
             uploadButton.setEnabled(false);
 
             final Uri[] img_Url = new Uri[1];
 
-            UploadTask uploadTask = firememeRef.putBytes (data, metadata);
             uploadTask.addOnSuccessListener(DisplayMessageActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    progressBar.setVisibility(View.GONE);
                     uploadButton.setEnabled(true);
 
                     img_Url[0] = taskSnapshot.getDownloadUrl();
-//                    downloadUrl.setText(url.toString());
-////                    downloadUrl.setVisibility(View.VISIBLE);
+                    Log.d(TAG, img_Url[0].toString());
+
                 }
             });
 
@@ -153,16 +162,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     private void writeNewUser(int availability, String email, Uri img_Url, String Discription) {
-        mDatabase.child("users").setValue(email);
-        mDatabase.child("users").child(email).child("img_Url").setValue(img_Url);
-        mDatabase.child("users").child(email).child("img_Url").child(img_Url).child("available").setValue(availability);
-        mDatabase.child("users").child(email).child("img_Url").child(img_Url).child("discription").setValue(Discription);
+        User user = new User(availability, img_Url, Discription);
+
+        Log.d(TAG, img_Url.toString());
+
+        mDatabase.child("users").child(email).setValue(user);
+        Log.d(TAG,"Send a new user");
+
+        progressBar.setVisibility(View.GONE);
     }
 
 
     public void sendMessage(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
         intent.putExtra("user_email", email);
         startActivity(intent);
     }
