@@ -59,7 +59,10 @@ public class SearchActivity extends AppCompatActivity {
         demoValue = (TextView) findViewById(R.id.tvValue);
         search = (Button) findViewById(R.id.btnSearch);
         mImageView = (ImageView) findViewById(R.id.image);
+
+
         publicCheckbox = findViewById(R.id.checkPublic);
+
 
         //database reference pointing to root of database
         try {
@@ -82,7 +85,7 @@ public class SearchActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.child("").addListenerForSingleValueEvent(new ValueEventListener() {
+                mDatabase.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         String value = dataSnapshot.getValue(String.class);
