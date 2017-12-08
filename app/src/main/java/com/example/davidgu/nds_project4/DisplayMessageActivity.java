@@ -27,11 +27,13 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class DisplayMessageActivity extends AppCompatActivity {
 
-    private static final String TAG = "Display";
+    private static final String TAG = "Display>>>>>>>";
 
     private int GET_FROM_GALLERY = 1;
 
@@ -158,12 +160,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
 
     private void writeNewUser(int availability, String email, Uri img_Url, String Discription) {
-        User user = new User(availability, img_Url, Discription);
+
+        Map<String, User> users = new HashMap<>();
+        users.put(email, new User(availability, img_Url, Discription));
+        mUserRef.setValue(users);
 
         Log.d(TAG, "In writeNewUser");
 
-        mDatabase.child("users").child(email).setValue(user);
-        Log.d(TAG,"Send a new user");
+//        mDatabase.child("users").child(email).setValue(user);
+//        Log.d(TAG,"Send a new user");
 
         progressBar.setVisibility(View.GONE);
     }
