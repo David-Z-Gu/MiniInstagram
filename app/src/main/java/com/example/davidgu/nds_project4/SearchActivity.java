@@ -6,6 +6,7 @@ package com.example.davidgu.nds_project4;
         import android.support.annotation.NonNull;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
+        import android.util.Log;
         import android.view.View;
         import android.widget.Button;
         import android.widget.CheckBox;
@@ -16,6 +17,7 @@ package com.example.davidgu.nds_project4;
 
         import com.google.android.gms.tasks.OnFailureListener;
         import com.google.android.gms.tasks.OnSuccessListener;
+        import com.google.firebase.database.ChildEventListener;
         import com.google.firebase.database.DataSnapshot;
         import com.google.firebase.database.DatabaseError;
         import com.google.firebase.database.DatabaseReference;
@@ -36,10 +38,11 @@ package com.example.davidgu.nds_project4;
 
 
 public class SearchActivity extends AppCompatActivity {
-
-    private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageRef = storage.getReferenceFromUrl("gs://mockinstagram-7a1fe.appspot.com").child("firememes/0b13a432-312e-4b3e-8207-dbcff85ec2ee.png");
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    private static final String TAG = "SearchActivity >>>>>>";
+    //
+//    private FirebaseStorage storage = FirebaseStorage.getInstance();
+//    private StorageReference storageRef = storage.getReferenceFromUrl("gs://mockinstagram-7a1fe.appspot.com").child("firememes/0b13a432-312e-4b3e-8207-dbcff85ec2ee.png");
+    private DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference("user");
     private String email;
 
     EditText editText;
@@ -65,36 +68,43 @@ public class SearchActivity extends AppCompatActivity {
 
 
         //database reference pointing to root of database
-        try {
-            final File localFile = File.createTempFile("images", "jpg");
-            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    mImageView.setImageBitmap(bitmap);
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                }
-            });
-        }
-        catch (IOException e ) {}
+//        try {
+//            final File localFile = File.createTempFile("images", "jpg");
+//            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                @Override
+//                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                    mImageView.setImageBitmap(bitmap);
+//
+//                }
+//            }).addOnFailureListener(new OnFailureListener() {
+//                @Override
+//                public void onFailure(@NonNull Exception exception) {
+//                }
+//            });
+//        }
+//        catch (IOException e ) {}
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatabase.child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                Log.d(TAG, "in onClick");
+                String description = editText.getText().toString();
+                userDatabase.child("Discription").equalTo(description).addValueEventListener(new ValueEventListener() {
+
                     @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String value = dataSnapshot.getValue(String.class);
-                        demoValue.setText(value);
+                    public void onDataChange(DataSnapshot snapshot) {
+                        Log.d(TAG, "in onDataChange");
+                        User user = snapshot.getValue(User.class);
+                        Log.d(TAG, user.img_Url);
                     }
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+
                     }
+
+
                 });
             }
         });
