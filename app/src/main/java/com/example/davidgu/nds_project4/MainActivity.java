@@ -62,10 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-
-
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+        //updateUI(currentUser);
     }
 //
 
@@ -83,14 +81,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            //FirebaseUser user = mAuth.getCurrentUser();
+                            //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            //updateUI(null);
                         }
 
                     }
@@ -121,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            //updateUI(null);
                         }
 
                         // [START_EXCLUDE]
@@ -138,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void signOut() {
         mAuth.signOut();
-        updateUI(null);
+        //updateUI(null);
     }
 
 
@@ -174,29 +172,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
 
-            findViewById(R.id.email_password_buttons).setVisibility(View.GONE);
-            findViewById(R.id.email_password_fields).setVisibility(View.GONE);
-            findViewById(R.id.signed_in_buttons).setVisibility(View.VISIBLE);
-            //findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
+//            findViewById(R.id.email_password_buttons).setVisibility(View.GONE);
+//            findViewById(R.id.email_password_fields).setVisibility(View.GONE);
+//            findViewById(R.id.signed_in_buttons).setVisibility(View.VISIBLE);
+//            //findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
+//
+//            findViewById(R.id.proceed).setVisibility(View.VISIBLE);
 
-            findViewById(R.id.proceed).setVisibility(View.VISIBLE);
+
 
             Intent intent = new Intent(this, DisplayMessageActivity.class);
-
             intent.putExtra("user_email", mEmailField.getText().toString());
             startActivity(intent);
 
 
 
 
-        } else {
-//            mStatusTextView.setText(R.string.signed_out);
-//            mDetailTextView.setText(null);
-
-            findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
-            findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
-            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
         }
+//        else {
+////            mStatusTextView.setText(R.string.signed_out);
+////            mDetailTextView.setText(null);
+//
+//            findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
+//            findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
+//            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
+//        }
     }
 
     @Override
@@ -215,15 +215,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
-    /** Called when the user taps the Send button */
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.editText);
-        //String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
-    }
+//    public void sendMessage(View view) {
+//        Intent intent = new Intent(this, DisplayMessageActivity.class);
+//        //EditText editText = (EditText) findViewById(R.id.editText);
+//        //String message = editText.getText().toString();
+//        //intent.putExtra(EXTRA_MESSAGE, message);
+//        startActivity(intent);
+//    }
 
 }
 
