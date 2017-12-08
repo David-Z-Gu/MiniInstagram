@@ -46,16 +46,23 @@ public class SearchActivity extends AppCompatActivity {
     Button search;
     TextView demoValue;
     ImageView mImageView;
+    CheckBox publicCheckbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        email = getIntent().getStringExtra("user_email");
+
         editText = (EditText) findViewById(R.id.etValue);
         demoValue = (TextView) findViewById(R.id.tvValue);
         search = (Button) findViewById(R.id.btnSearch);
         mImageView = (ImageView) findViewById(R.id.image);
-        email = getIntent().getStringExtra("user_email");
+
+
+        publicCheckbox = findViewById(R.id.checkPublic);
+
 
         //database reference pointing to root of database
         try {

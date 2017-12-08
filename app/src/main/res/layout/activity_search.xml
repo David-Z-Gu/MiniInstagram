@@ -15,8 +15,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnSearch"
+        app:layout_constraintBottom_toTopOf="@id/checkPublic"
         tools:layout_editor_absoluteX="0dp" />
+
+    <CheckBox
+        android:id="@+id/checkPublic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Public"
+        app:layout_constraintTop_toBottomOf="@id/etValue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnSearch"
+        tools:layout_editor_absoluteY="77dp" />
 
     <Button
         android:id="@+id/btnSearch"
@@ -24,7 +35,7 @@
         android:layout_height="43dp"
         android:layout_marginTop="48dp"
         android:text="Search"
-        app:layout_constraintTop_toBottomOf="@+id/etValue"
+        app:layout_constraintTop_toBottomOf="@+id/checkPublic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tvValue"
@@ -37,7 +48,7 @@
         android:layout_below="@+id/btnSearch"
         android:layout_marginTop="8dp"
         android:gravity="center_horizontal"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/btnSearch"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -56,5 +67,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp" />
+
 
 </android.support.constraint.ConstraintLayout>
