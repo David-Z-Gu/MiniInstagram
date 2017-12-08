@@ -7,10 +7,10 @@
     tools:context="com.example.davidgu.nds_project4.DisplayMessageActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/image_description"
         android:layout_width="185dp"
         android:layout_height="108dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="212dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -24,10 +24,11 @@
         android:layout_width="187dp"
         android:layout_height="152dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.498"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/common_full_open_on_phone" />
 
     <Button
@@ -48,4 +49,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <CheckBox
+        android:id="@+id/image_public"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="public_image"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="346dp" />
+
 </android.support.constraint.ConstraintLayout>

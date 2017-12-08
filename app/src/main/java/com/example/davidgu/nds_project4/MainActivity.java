@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "EmailPassword";
 
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
+    //private TextView mStatusTextView;
+//    private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
 
@@ -180,6 +180,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
 
             findViewById(R.id.proceed).setVisibility(View.VISIBLE);
+
+            Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+            intent.putExtra("user_email", mEmailField.getText().toString());
+            startActivity(intent);
+
+
 
 
         } else {
