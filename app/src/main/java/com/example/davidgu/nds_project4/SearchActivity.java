@@ -42,7 +42,7 @@ public class SearchActivity extends AppCompatActivity {
     //
 //    private FirebaseStorage storage = FirebaseStorage.getInstance();
 //    private StorageReference storageRef = storage.getReferenceFromUrl("gs://mockinstagram-7a1fe.appspot.com").child("firememes/0b13a432-312e-4b3e-8207-dbcff85ec2ee.png");
-    private DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference("user");
+    private DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
     private String email;
 
     EditText editText;
