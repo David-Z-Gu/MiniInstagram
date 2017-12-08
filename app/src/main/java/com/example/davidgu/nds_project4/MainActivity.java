@@ -215,14 +215,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-//    public void sendMessage(View view) {
-//        Intent intent = new Intent(this, DisplayMessageActivity.class);
-//        //EditText editText = (EditText) findViewById(R.id.editText);
-//        //String message = editText.getText().toString();
-//        //intent.putExtra(EXTRA_MESSAGE, message);
-//        startActivity(intent);
-//    }
-
 }
 
 //Reference:

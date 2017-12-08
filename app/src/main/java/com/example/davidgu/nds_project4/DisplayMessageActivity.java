@@ -76,10 +76,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 sendMessage(v);
             }
         });
-
-        //downloadUrl = (TextView) findViewById(R.id.download_url);
-
-
     }
 
 
@@ -164,7 +160,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private void writeNewUser(int availability, String email, Uri img_Url, String Discription) {
         User user = new User(availability, img_Url, Discription);
 
-        Log.d(TAG, img_Url.toString());
+        Log.d(TAG, "In writeNewUser");
 
         mDatabase.child("users").child(email).setValue(user);
         Log.d(TAG,"Send a new user");
