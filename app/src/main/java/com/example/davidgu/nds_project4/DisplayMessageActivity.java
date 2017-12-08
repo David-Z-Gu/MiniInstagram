@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -104,31 +106,41 @@ public class DisplayMessageActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             uploadButton.setEnabled(false);
 
-            final Uri[] img_Url = new Uri[1];
+//            final Uri[] img_Url = new Uri[1];
+//            addOnSuccessListener(DisplayMessageActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>()
+//            final String[] img_Url = new String[1];
 
-            uploadTask.addOnSuccessListener(DisplayMessageActivity.this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle unsuccessful uploads
+                    Log.d(TAG, "In onFailure");
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Log.d(TAG, "In onSuccess");
                     uploadButton.setEnabled(true);
+//                    img_Url[0] = taskSnapshot.getDownloadUrl();
+//                    Log.d(TAG, img_Url[0].toString());
+//                    img_Url[0] = taskSnapshot.getDownloadUrl().toString();
+                    String img_Url = taskSnapshot.getDownloadUrl().toString();
 
-                    img_Url[0] = taskSnapshot.getDownloadUrl();
-                    Log.d(TAG, img_Url[0].toString());
+                    int availability;
+                    //mDatabase.setValue();
+                    if (imagePublic.isChecked()){
+                        availability = 1;
+                    }
+                    else{
+                        availability = 0;
+                    }
 
+                    String image_description = description.getText().toString();
+
+                    writeNewUser(availability, email, img_Url, image_description);
                 }
             });
 
-            int availability;
-            //mDatabase.setValue();
-            if (imagePublic.isChecked()){
-                availability = 1;
-            }
-            else{
-                availability = 0;
-            }
-
-            String image_description = description.getText().toString();
-
-            writeNewUser(availability, email, img_Url[0], image_description);
         }
     }
 
@@ -159,16 +171,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
 
 
-    private void writeNewUser(int availability, String email, Uri img_Url, String Discription) {
+    private void writeNewUser(int availability, String email, String img_Url, String Discription) {
+
+        Log.d(TAG, "In writeNewUser");
+        Log.d(TAG, img_Url);
+        Log.d(TAG, String.valueOf(availability));
+        Log.d(TAG, Discription);
 
         Map<String, User> users = new HashMap<>();
         users.put(email, new User(availability, img_Url, Discription));
         mUserRef.setValue(users);
-
-        Log.d(TAG, "In writeNewUser");
-
-//        mDatabase.child("users").child(email).setValue(user);
-//        Log.d(TAG,"Send a new user");
 
         progressBar.setVisibility(View.GONE);
     }
