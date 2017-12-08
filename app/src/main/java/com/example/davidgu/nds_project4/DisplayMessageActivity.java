@@ -14,7 +14,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -78,8 +77,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private class UploadOnClickListener implements View.OnClickListener {
         @Override
         public void onClick (View view) {
-
-//
 //            imageContainer.setDrawingCacheEnabled (true);
 //            imageContainer.buildDrawingCache();
 //            Bitmap bitmap = imageContainer.getDrawingCache();
@@ -95,11 +92,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
             StorageMetadata metadata = new StorageMetadata.Builder()
                     .build();
 
-
-
             progressBar.setVisibility(View.VISIBLE);
             uploadButton.setEnabled(false);
-
 
             final Uri[] img_Url = new Uri[1];
 
@@ -171,7 +165,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //EditText editText = (EditText) findViewById(R.id.editText);
         intent.putExtra("user_email", email);
         startActivity(intent);
-//    }
+    }
 }
 
 

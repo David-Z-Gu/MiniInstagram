@@ -9,69 +9,69 @@
 
     <EditText
         android:id="@+id/field_email"
-        android:layout_width="77dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="306dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
-        android:hint="@string/edit_username"
+        android:hint="Enter your username"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/email_sign_in_button"
-        app:layout_constraintEnd_toStartOf="@+id/field_password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/field_password" />
 
     <EditText
         android:id="@+id/field_password"
-        android:layout_width="64dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginTop="148dp"
+        android:layout_width="311dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="39dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="72dp"
         android:ems="10"
         android:hint="@string/edit_password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintBottom_toTopOf="@+id/email_sign_in_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/field_email" />
 
     <Button
         android:id="@+id/email_sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="205dp"
+        android:layout_height="46dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="sign_in_button"
-        app:layout_constraintBottom_toTopOf="@+id/sign_out_button"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintBottom_toTopOf="@+id/email_create_account_button"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/field_password" />
 
     <Button
         android:id="@+id/email_create_account_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="36dp"
         android:layout_marginRight="16dp"
-        android:layout_marginStart="8dp"
         android:text="create_account_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintBottom_toTopOf="@+id/sign_out_button"
+        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/email_sign_in_button" />
 
     <Button
         android:id="@+id/sign_out_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="32dp"
         android:text="sign_out_button"
-        app:layout_constraintBottom_toTopOf="@+id/email_create_account_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_create_account_button" />
 
 
     <!--<Button-->
