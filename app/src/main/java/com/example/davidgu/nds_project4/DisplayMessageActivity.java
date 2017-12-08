@@ -162,7 +162,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private void writeNewUser(int availability, String email, Uri img_Url, String Discription) {
 
         Map<String, User> users = new HashMap<>();
-        users.put(email, new User(availability, img_Url, Discription));
+        users.put("Fani", new User(availability, img_Url, Discription));
         mUserRef.setValue(users);
 
         Log.d(TAG, "In writeNewUser");
