@@ -22,7 +22,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -31,6 +30,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 
 public class DisplayMessageActivity extends AppCompatActivity {
@@ -179,7 +179,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Log.d(TAG, Discription);
 
         Map<String, User> users = new HashMap<>();
-        users.put("Fani", new User(availability, img_Url, Discription));
+//        Random rand = new Random();
+//        int n = rand.nextInt(20);
+//        String temp = String.valueOf(n);
+        users.put("David", new User(availability, img_Url, Discription));
         mUserRef.setValue(users);
 
         progressBar.setVisibility(View.GONE);

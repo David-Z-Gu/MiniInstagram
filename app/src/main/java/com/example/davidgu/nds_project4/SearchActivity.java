@@ -42,7 +42,7 @@ public class SearchActivity extends AppCompatActivity {
     //
 //    private FirebaseStorage storage = FirebaseStorage.getInstance();
 //    private StorageReference storageRef = storage.getReferenceFromUrl("gs://mockinstagram-7a1fe.appspot.com").child("firememes/0b13a432-312e-4b3e-8207-dbcff85ec2ee.png");
-    private DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference userDatabase = FirebaseDatabase.getInstance().getReference("Fani");
     private String email;
 
     EditText editText;
@@ -90,13 +90,16 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "in onClick");
                 String description = editText.getText().toString();
-                userDatabase.child("Discription").equalTo(description).addValueEventListener(new ValueEventListener() {
+                userDatabase.child("img_Url").addValueEventListener(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         Log.d(TAG, "in onDataChange");
-                        User user = snapshot.getValue(User.class);
-                        Log.d(TAG, user.img_Url);
+//                        Log.d(TAG, "in onDataChange");
+//                        User user = snapshot.getValue(User.class);
+//                        Log.d(TAG, user.getUrl());
+                        User post = snapshot.getValue(User.class);
+                        Log.d(TAG, post.getUrl());
                     }
 
                     @Override

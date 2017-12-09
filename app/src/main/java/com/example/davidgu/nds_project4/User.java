@@ -21,4 +21,8 @@ class User {
         this.Discription = Discription;
     }
 
+    public String getUrl() {
+        return img_Url;
+    }
+
 }
