@@ -33,10 +33,13 @@ package com.example.davidgu.nds_project4;
 
         import android.net.Uri;
 
+        import java.io.BufferedInputStream;
         import java.io.File;
         import java.io.FileNotFoundException;
         import java.io.IOException;
         import java.io.InputStream;
+        import java.net.URL;
+        import java.net.URLConnection;
         import java.util.UUID;
 
 
@@ -92,20 +95,19 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "in onClick");
-                Uri url = Uri.parse("https://firebasestorage.googleapis.com/v0/b/mockinstagram-7a1fe.appspot.com/o/firememes%2Fd3363923-16c0-4a36-8e83-e7a3f0b4b321.png?alt=media&token=52aa299b-d13e-41f9-9585-42608e4c35f9");
+                Bitmap url = getImageBitmap("https://firebasestorage.googleapis.com/v0/b/mockinstagram-7a1fe.appspot.com/o/firememes%2Fd3363923-16c0-4a36-8e83-e7a3f0b4b321.png?alt=media&token=52aa299b-d13e-41f9-9585-42608e4c35f9");
 
-                InputStream image_stream = null;
-                try {
-                    image_stream = getContentResolver().openInputStream(url);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                Bitmap bitmap= BitmapFactory.decodeStream(image_stream );
-                mImageView.setImageBitmap(bitmap);
-                //
-//                Bitmap bitmap;
-//                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), url);
+//                InputStream image_stream = null;
+//                try {
+//                    image_stream = getContentResolver().openInputStream(url);
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }
+//                Bitmap bitmap= BitmapFactory.decodeStream(image_stream );
 //                mImageView.setImageBitmap(bitmap);
+                //
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(R.layout.activity_search.getContentResolver(), url);
+                mImageView.setImageBitmap(url);
 
 //                String description = editText.getText().toString();
 //                userDatabase.child("mockinstagram-7a1fe").child("Discription").equalTo(description).addValueEventListener(new ValueEventListener() {
@@ -125,5 +127,22 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private Bitmap getImageBitmap(String url) {
+        Bitmap bm = null;
+        try {
+            URL aURL = new URL(url);
+            URLConnection conn = aURL.openConnection();
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            BufferedInputStream bis = new BufferedInputStream(is);
+            bm = BitmapFactory.decodeStream(bis);
+            bis.close();
+            is.close();
+        } catch (IOException e) {
+            Log.e(TAG, "Error getting bitmap", e);
+        }
+        return bm;
     }
 }
