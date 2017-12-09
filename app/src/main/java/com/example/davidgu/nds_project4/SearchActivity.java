@@ -94,8 +94,9 @@ public class SearchActivity extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mImageView.setImageResource(R.drawable.demo);
                 Log.d(TAG, "in onClick");
-                Bitmap url = getImageBitmap("https://firebasestorage.googleapis.com/v0/b/mockinstagram-7a1fe.appspot.com/o/firememes%2Fd3363923-16c0-4a36-8e83-e7a3f0b4b321.png?alt=media&token=52aa299b-d13e-41f9-9585-42608e4c35f9");
+                //Bitmap url = getImageBitmap("https://firebasestorage.googleapis.com/v0/b/mockinstagram-7a1fe.appspot.com/o/firememes%2Fd3363923-16c0-4a36-8e83-e7a3f0b4b321.png?alt=media&token=52aa299b-d13e-41f9-9585-42608e4c35f9");
 
 //                InputStream image_stream = null;
 //                try {
@@ -107,7 +108,7 @@ public class SearchActivity extends AppCompatActivity {
 //                mImageView.setImageBitmap(bitmap);
                 //
                 //Bitmap bitmap = MediaStore.Images.Media.getBitmap(R.layout.activity_search.getContentResolver(), url);
-                mImageView.setImageBitmap(url);
+                //mImageView.setImageBitmap(url);
 
 //                String description = editText.getText().toString();
 //                userDatabase.child("mockinstagram-7a1fe").child("Discription").equalTo(description).addValueEventListener(new ValueEventListener() {
@@ -129,20 +130,20 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    private Bitmap getImageBitmap(String url) {
-        Bitmap bm = null;
-        try {
-            URL aURL = new URL(url);
-            URLConnection conn = aURL.openConnection();
-            conn.connect();
-            InputStream is = conn.getInputStream();
-            BufferedInputStream bis = new BufferedInputStream(is);
-            bm = BitmapFactory.decodeStream(bis);
-            bis.close();
-            is.close();
-        } catch (IOException e) {
-            Log.e(TAG, "Error getting bitmap", e);
-        }
-        return bm;
-    }
+//    private Bitmap getImageBitmap(String url) {
+//        Bitmap bm = null;
+//        try {
+//            URL aURL = new URL(url);
+//            URLConnection conn = aURL.openConnection();
+//            conn.connect();
+//            InputStream is = conn.getInputStream();
+//            BufferedInputStream bis = new BufferedInputStream(is);
+//            bm = BitmapFactory.decodeStream(bis);
+//            bis.close();
+//            is.close();
+//        } catch (IOException e) {
+//            Log.e(TAG, "Error getting bitmap", e);
+//        }
+//        return bm;
+//    }
 }
